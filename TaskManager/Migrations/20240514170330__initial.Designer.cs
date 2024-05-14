@@ -12,7 +12,7 @@ using TaskManager.DataAccess;
 namespace TaskManager.Migrations
 {
     [DbContext(typeof(TaskManagerDbContext))]
-    [Migration("20240514163916__initial")]
+    [Migration("20240514170330__initial")]
     partial class _initial
     {
         /// <inheritdoc />
@@ -45,53 +45,13 @@ namespace TaskManager.Migrations
                     b.Property<TimeSpan>("EstimatedRime")
                         .HasColumnType("interval");
 
-                    b.Property<int>("ExecutorId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ExecutorId");
-
                     b.ToTable("Tasks");
-                });
-
-            modelBuilder.Entity("TaskManager.Models.User", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("MiddleName")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
-                });
-
-            modelBuilder.Entity("TaskManager.Models.SimpleTask", b =>
-                {
-                    b.HasOne("TaskManager.Models.User", "Executor")
-                        .WithMany()
-                        .HasForeignKey("ExecutorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Executor");
                 });
 #pragma warning restore 612, 618
         }

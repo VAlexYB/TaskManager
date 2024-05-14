@@ -16,7 +16,6 @@ namespace TaskManager.DataAccess.Repositories
         {
             var tasks = await _context.Tasks
                 .AsNoTracking()
-                .Include(t => t.Executor)
                 .ToListAsync();
 
             return tasks;
