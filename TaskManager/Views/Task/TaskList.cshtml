@@ -1,0 +1,48 @@
+﻿@model List<TaskManager.Models.SimpleTask>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Список задач</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>List of tasks</h2>
+
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Executors</th>
+        </tr>
+        @foreach (var task in Model)
+        {
+            <tr>
+                <td>@task.Name</td>
+                <td>@task.Description</td>
+                <td>
+                    <div>@task.Executor.LastName @task.Executor.FirstName</div> 
+                </td>
+                <!-- Дополнительные столбцы, если необходимо -->
+            </tr>
+        }
+    </table>
+
+</body>
+</html>
